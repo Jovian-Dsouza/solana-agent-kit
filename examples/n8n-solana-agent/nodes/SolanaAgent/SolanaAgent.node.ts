@@ -28,8 +28,8 @@ class SolanaAgent implements INodeType {
 		defaults: {
 			name: 'Solana Token Agent',
 		},
-		inputs: ['main'],
-		outputs: ['main'],
+		inputs: ["main" as any],
+		outputs: ["main" as any],
 		credentials: [
 			{
 				name: 'solanaApi',
