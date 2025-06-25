@@ -31,12 +31,13 @@ This is an n8n community node for integrating the Solana Agent Kit with n8n work
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/n8n-nodes-solana-agent
-cd n8n-nodes-solana-agent
+git clone https://github.com/sendaifun/solana-agent-kit
+cd examples/n8n-solana-agent
 ```
 
 2. Install dependencies:
 ```bash
+nvm use v22
 npm install
 ```
 
