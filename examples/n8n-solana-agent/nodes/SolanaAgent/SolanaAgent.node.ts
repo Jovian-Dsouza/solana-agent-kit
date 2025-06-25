@@ -3,7 +3,6 @@ import {
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
-	NodeConnectionType,
 	NodeOperationError,
 } from 'n8n-workflow';
 import { PublicKey } from '@solana/web3.js';
@@ -29,21 +28,8 @@ class SolanaAgent implements INodeType {
 		defaults: {
 			name: 'Solana Token Agent',
 		},
-		inputs: [
-			{
-				displayName: 'Input',
-				maxConnections: 1,
-				required: true,
-				type: NodeConnectionType.Main,
-			},
-		],
-		outputs: [
-			{
-				displayName: 'Output',
-				maxConnections: 1,
-				type: NodeConnectionType.Main,
-			},
-		],
+		inputs: ['main'],
+		outputs: ['main'],
 		credentials: [
 			{
 				name: 'solanaApi',
@@ -58,46 +44,15 @@ class SolanaAgent implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
+						name: 'Close Empty Token Accounts',
+						value: 'closeEmptyTokenAccounts',
+						action: 'Close empty token accounts',
+					},
+					{
 						name: 'Create Token',
 						value: 'createToken',
 						description: 'Create a new token',
 						action: 'Create a new token',
-					},
-					{
-						name: 'Transfer Token',
-						value: 'transferToken',
-						description: 'Transfer tokens',
-						action: 'Transfer tokens',
-					},
-					{
-						name: 'Get Token Balances',
-						value: 'getTokenBalances',
-						description: 'Get all token balances for a wallet',
-						action: 'Get token balances',
-					},
-					{
-						name: 'Get Single Token Balance',
-						value: 'getSingleBalance',
-						description: 'Get balance for a specific token',
-						action: 'Get single token balance',
-					},
-					{
-						name: 'Get Other Wallet Balance',
-						value: 'getOtherBalance',
-						description: 'Get token balance for another wallet',
-						action: 'Get other wallet balance',
-					},
-					{
-						name: 'Close Empty Token Accounts',
-						value: 'closeEmptyTokenAccounts',
-						description: 'Close empty token accounts',
-						action: 'Close empty token accounts',
-					},
-					{
-						name: 'Request Faucet Funds',
-						value: 'requestFaucet',
-						description: 'Request SOL from faucet (devnet/testnet)',
-						action: 'Request faucet funds',
 					},
 					{
 						name: 'Get Network TPS',
@@ -106,10 +61,40 @@ class SolanaAgent implements INodeType {
 						action: 'Get network TPS',
 					},
 					{
+						name: 'Get Other Wallet Balance',
+						value: 'getOtherBalance',
+						description: 'Get token balance for another wallet',
+						action: 'Get other wallet balance',
+					},
+					{
+						name: 'Get Single Token Balance',
+						value: 'getSingleBalance',
+						description: 'Get balance for a specific token',
+						action: 'Get single token balance',
+					},
+					{
+						name: 'Get Token Balances',
+						value: 'getTokenBalances',
+						description: 'Get all token balances for a wallet',
+						action: 'Get token balances',
+					},
+					{
 						name: 'Get Wallet Address',
 						value: 'getWalletAddress',
 						description: 'Get current wallet address',
 						action: 'Get wallet address',
+					},
+					{
+						name: 'Request Faucet Funds',
+						value: 'requestFaucet',
+						description: 'Request SOL from faucet (devnet/testnet)',
+						action: 'Request faucet funds',
+					},
+					{
+						name: 'Transfer Token',
+						value: 'transferToken',
+						description: 'Transfer tokens',
+						action: 'Transfer tokens',
 					},
 				],
 				default: 'createToken',
@@ -119,6 +104,7 @@ class SolanaAgent implements INodeType {
 				displayName: 'Token Name',
 				name: 'tokenName',
 				type: 'string',
+				typeOptions: { password: true },
 				required: true,
 				displayOptions: {
 					show: {
@@ -132,6 +118,7 @@ class SolanaAgent implements INodeType {
 				displayName: 'Token Symbol',
 				name: 'tokenSymbol',
 				type: 'string',
+				typeOptions: { password: true },
 				required: true,
 				displayOptions: {
 					show: {
@@ -145,7 +132,6 @@ class SolanaAgent implements INodeType {
 				displayName: 'Decimals',
 				name: 'decimals',
 				type: 'number',
-				required: false,
 				displayOptions: {
 					show: {
 						operation: ['createToken'],
@@ -158,7 +144,6 @@ class SolanaAgent implements INodeType {
 				displayName: 'Initial Supply',
 				name: 'initialSupply',
 				type: 'number',
-				required: false,
 				displayOptions: {
 					show: {
 						operation: ['createToken'],
@@ -198,7 +183,7 @@ class SolanaAgent implements INodeType {
 				displayName: 'Token Address',
 				name: 'tokenAddress',
 				type: 'string',
-				required: false,
+				typeOptions: { password: true },
 				displayOptions: {
 					show: {
 						operation: ['transferToken', 'getSingleBalance'],
@@ -212,7 +197,6 @@ class SolanaAgent implements INodeType {
 				displayName: 'Wallet Address',
 				name: 'walletAddress',
 				type: 'string',
-				required: false,
 				displayOptions: {
 					show: {
 						operation: ['getTokenBalances', 'getOtherBalance'],
@@ -225,7 +209,7 @@ class SolanaAgent implements INodeType {
 				displayName: 'Token Address for Other Wallet',
 				name: 'otherTokenAddress',
 				type: 'string',
-				required: false,
+				typeOptions: { password: true },
 				displayOptions: {
 					show: {
 						operation: ['getOtherBalance'],
