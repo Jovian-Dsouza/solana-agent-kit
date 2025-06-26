@@ -1,5 +1,5 @@
 import { SolanaAgentKit } from 'solana-agent-kit';
-import { TransferTokenParams } from '../types';
+import { SolanaAgentKitWithTokenPlugin, TransferTokenParams } from '../types';
 import { ValidationUtils } from '../utils/validation';
 import { SolanaUtils } from '../utils/solana';
 import { BaseOperation } from './BaseOperation';
@@ -22,6 +22,6 @@ export class TransferTokenOperation extends BaseOperation<TransferTokenParams> {
 		}
 		const mintAddress = SolanaUtils.createPublicKeyFromString(params.tokenAddress);
 
-		return await (agent as any).transfer(recipientAddress, params.amount, mintAddress);
+		return await (agent as any as SolanaAgentKitWithTokenPlugin).methods.transfer(agent, recipientAddress, params.amount, mintAddress);
 	}
 }

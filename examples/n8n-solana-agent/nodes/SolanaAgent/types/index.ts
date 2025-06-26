@@ -1,4 +1,7 @@
+import type { SolanaAgentKit } from 'solana-agent-kit';
+import TokenPlugin from '@solana-agent-kit/plugin-token';
 
+export type SolanaAgentKitWithTokenPlugin = SolanaAgentKit<typeof TokenPlugin["methods"]>;
 /**
  * Base interface for all operation parameters
  */

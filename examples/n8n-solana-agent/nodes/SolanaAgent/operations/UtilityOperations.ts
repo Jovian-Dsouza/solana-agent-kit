@@ -1,5 +1,5 @@
 import { SolanaAgentKit } from 'solana-agent-kit';
-import { BaseOperationParams } from '../types';
+import { BaseOperationParams, SolanaAgentKitWithTokenPlugin } from '../types';
 import { BaseOperation } from './BaseOperation';
 
 /**
@@ -37,7 +37,7 @@ export class GetTPSOperation extends BaseOperation<BaseOperationParams> {
 	}
 
 	async execute(params: BaseOperationParams, agent: SolanaAgentKit): Promise<any> {
-		return await (agent as any).getTPS();
+		return await (agent as any as SolanaAgentKitWithTokenPlugin).methods.getTPS(agent);
 	}
 }
 
