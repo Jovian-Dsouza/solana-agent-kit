@@ -4,7 +4,7 @@ This document describes the modular architecture implemented for the Solana Agen
 
 ## Architecture Overview
 
-The codebase has been refactored from a monolithic structure to a modular, maintainable architecture following SOLID principles and separation of concerns.
+The codebase has been refactored to a modular, maintainable architecture following SOLID principles and separation of concerns.
 
 ## Directory Structure
 
