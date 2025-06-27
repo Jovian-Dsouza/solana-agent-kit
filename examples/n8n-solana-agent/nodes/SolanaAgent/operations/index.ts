@@ -1,16 +1,16 @@
 // Export all operation classes
 export { BaseOperation } from './BaseOperation';
 export { CreateTokenOperation } from './CreateTokenOperation';
-export { TransferTokenOperation } from './TransferTokenOperation';
+export { TransferTokenOperation } from './token/TransferTokenOperation';
 export {
 	GetTokenBalancesOperation,
-	GetSingleBalanceOperation,
+	GetBalanceOperation,
 	GetOtherBalanceOperation,
-} from './BalanceOperations';
+} from './token/BalanceOperations';
 export {
 	CloseEmptyTokenAccountsOperation,
 	RequestFaucetOperation,
 	GetTPSOperation,
 	GetWalletAddressOperation,
-} from './UtilityOperations';
+} from './token/UtilityOperations';
 export { OperationFactory } from './OperationFactory';

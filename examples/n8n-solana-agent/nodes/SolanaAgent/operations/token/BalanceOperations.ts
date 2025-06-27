@@ -1,8 +1,8 @@
 import { SolanaAgentKit } from 'solana-agent-kit';
-import { BalanceParams, OtherBalanceParams } from '../types';
-import { ValidationUtils } from '../utils/validation';
-import { SolanaUtils } from '../utils/solana';
-import { BaseOperation } from './BaseOperation';
+import { BalanceParams, OtherBalanceParams, SolanaAgentKitWithTokenPlugin } from '../../types';
+import { ValidationUtils } from '../../utils/validation';
+import { SolanaUtils } from '../../utils/solana';
+import { BaseOperation } from '../BaseOperation';
 
 /**
  * Handles getting all token balances for a wallet
@@ -17,14 +17,14 @@ export class GetTokenBalancesOperation extends BaseOperation<BalanceParams> {
 			throw new Error('walletAddress is required');
 		}
 		const walletPubkey = SolanaUtils.createPublicKeyFromString(params.walletAddress);
-		return await (agent as any).getTokenBalances(walletPubkey);
+		return await (agent as any as SolanaAgentKitWithTokenPlugin).methods.get_token_balance(agent, walletPubkey);
 	}
 }
 
 /**
  * Handles getting balance for a specific token
  */
-export class GetSingleBalanceOperation extends BaseOperation<BalanceParams> {
+export class GetBalanceOperation extends BaseOperation<BalanceParams> {
 	validate(params: BalanceParams): void {
 		// No specific validation needed for this operation
 	}
@@ -34,7 +34,7 @@ export class GetSingleBalanceOperation extends BaseOperation<BalanceParams> {
 			throw new Error('tokenAddress is required');
 		}
 		const mintAddress = SolanaUtils.createPublicKeyFromString(params.tokenAddress);
-		return await (agent as any).getBalance(mintAddress);
+		return await (agent as any as SolanaAgentKitWithTokenPlugin).methods.get_balance(agent, mintAddress);
 	}
 }
 
@@ -56,6 +56,6 @@ export class GetOtherBalanceOperation extends BaseOperation<OtherBalanceParams> 
 		}
 		const mintAddress = SolanaUtils.createPublicKeyFromString(params.otherTokenAddress);
 
-		return await (agent as any).getBalanceOther(walletAddress, mintAddress);
+		return await (agent as any as SolanaAgentKitWithTokenPlugin).methods.get_balance_other(agent, walletAddress, mintAddress);
 	}
 }

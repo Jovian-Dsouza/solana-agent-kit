@@ -1,6 +1,6 @@
 import { SolanaAgentKit } from 'solana-agent-kit';
-import { BaseOperationParams, SolanaAgentKitWithTokenPlugin } from '../types';
-import { BaseOperation } from './BaseOperation';
+import { BaseOperationParams, SolanaAgentKitWithTokenPlugin } from '../../types';
+import { BaseOperation } from '../BaseOperation';
 
 /**
  * Handles closing empty token accounts
@@ -11,7 +11,7 @@ export class CloseEmptyTokenAccountsOperation extends BaseOperation<BaseOperatio
 	}
 
 	async execute(params: BaseOperationParams, agent: SolanaAgentKit): Promise<any> {
-		return await (agent as any).closeEmptyTokenAccounts();
+		return await (agent as any as SolanaAgentKitWithTokenPlugin).methods.closeEmptyTokenAccounts(agent);
 	}
 }
 
@@ -24,7 +24,7 @@ export class RequestFaucetOperation extends BaseOperation<BaseOperationParams> {
 	}
 
 	async execute(params: BaseOperationParams, agent: SolanaAgentKit): Promise<any> {
-		return await (agent as any).requestFaucetFunds();
+		return await (agent as any as SolanaAgentKitWithTokenPlugin).methods.request_faucet_funds(agent);
 	}
 }
 

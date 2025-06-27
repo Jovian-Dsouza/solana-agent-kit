@@ -20,6 +20,7 @@ export class CreateTokenOperation extends BaseOperation<CreateTokenParams> {
 	}
 
 	async execute(params: CreateTokenParams, agent: SolanaAgentKit): Promise<any> {
+		//TODO test this
 		return await (agent as any).deployToken({
 			name: params.tokenName.trim(),
 			symbol: params.tokenSymbol.trim(),

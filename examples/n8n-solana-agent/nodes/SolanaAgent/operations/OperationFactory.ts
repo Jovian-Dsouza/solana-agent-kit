@@ -1,17 +1,17 @@
 import { BaseOperationParams, OperationHandler } from '../types';
 import { CreateTokenOperation } from './CreateTokenOperation';
-import { TransferTokenOperation } from './TransferTokenOperation';
+import { TransferTokenOperation } from './token/TransferTokenOperation';
 import {
 	GetTokenBalancesOperation,
-	GetSingleBalanceOperation,
+	GetBalanceOperation,
 	GetOtherBalanceOperation,
-} from './BalanceOperations';
+} from './token/BalanceOperations';
 import {
 	CloseEmptyTokenAccountsOperation,
 	RequestFaucetOperation,
 	GetTPSOperation,
 	GetWalletAddressOperation,
-} from './UtilityOperations';
+} from './token/UtilityOperations';
 
 /**
  * Factory for creating operation handlers
@@ -21,7 +21,7 @@ export class OperationFactory {
 		['createToken', () => new CreateTokenOperation()],
 		['transferToken', () => new TransferTokenOperation()],
 		['getTokenBalances', () => new GetTokenBalancesOperation()],
-		['getSingleBalance', () => new GetSingleBalanceOperation()],
+		['getBalance', () => new GetBalanceOperation()],
 		['getOtherBalance', () => new GetOtherBalanceOperation()],
 		['closeEmptyTokenAccounts', () => new CloseEmptyTokenAccountsOperation()],
 		['requestFaucet', () => new RequestFaucetOperation()],

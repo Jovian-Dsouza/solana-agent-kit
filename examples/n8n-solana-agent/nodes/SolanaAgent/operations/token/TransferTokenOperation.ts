@@ -1,8 +1,8 @@
 import { SolanaAgentKit } from 'solana-agent-kit';
-import { SolanaAgentKitWithTokenPlugin, TransferTokenParams } from '../types';
-import { ValidationUtils } from '../utils/validation';
-import { SolanaUtils } from '../utils/solana';
-import { BaseOperation } from './BaseOperation';
+import { SolanaAgentKitWithTokenPlugin, TransferTokenParams } from '../../types';
+import { ValidationUtils } from '../../utils/validation';
+import { SolanaUtils } from '../../utils/solana';
+import { BaseOperation } from '../BaseOperation';
 
 /**
  * Handles token transfer operations
